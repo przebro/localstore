@@ -21,10 +21,8 @@ var (
 func init() {
 
 	singleRecordWithID, testCollection = tst.GetSingleRecord("../data/testdata.json")
-	manager, err := local.GetFileManager("../")
-	if err != nil {
-		panic("")
-	}
+	manager := local.GetFileManager("../")
+
 	data, err := manager.NewData("testcollection", 1, false)
 	if err != nil {
 		panic("")

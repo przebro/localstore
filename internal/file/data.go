@@ -41,20 +41,20 @@ type FileManager interface {
 	GetData(name string, tm int, updatesync bool) (*JsonFileData, error)
 }
 
-var paths = []string{}
+var managers = map[string]FileManager{}
 
-//GetFileManager - gets a manager for given directory, if the directory is already owned by manager returns error
-func GetFileManager(path string) (FileManager, error) {
+//GetFileManager - gets a manager for a given directory, if the directory is already owned by manager returns existing manager
+func GetFileManager(path string) FileManager {
 
-	for i := range paths {
-		if paths[i] == path {
-			return nil, errors.New("unable to initialize manager")
+	for m, i := range managers {
+		if m == path {
+			return i
 		}
 	}
+	m := &jsonFileManager{path: path, m: map[string]*JsonFileData{}, lock: sync.Mutex{}}
+	managers[path] = m
 
-	paths = append(paths, path)
-
-	return &jsonFileManager{path: path, m: map[string]*JsonFileData{}, lock: sync.Mutex{}}, nil
+	return m
 }
 
 //Close - sync closes all collections
@@ -65,12 +65,6 @@ func (cm *jsonFileManager) Close() {
 	for k, n := range cm.m {
 		n.Sync()
 		delete(cm.m, k)
-	}
-
-	for i := range paths {
-		if paths[i] == cm.path {
-			paths = append(paths[:i], paths[i+1:]...)
-		}
 	}
 }
 

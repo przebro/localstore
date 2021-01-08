@@ -72,10 +72,7 @@ func initLocalstore(opt o.ConnectionOptions) (store.DataStore, error) {
 			return nil, err
 		}
 	}
-	m, err := file.GetFileManager(opt.Path)
-	if err != nil {
-		return nil, err
-	}
+	m := file.GetFileManager(opt.Path)
 
 	return &localStore{manager: m, updsync: updsync, synctime: synctime}, nil
 }
