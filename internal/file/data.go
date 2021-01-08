@@ -131,6 +131,7 @@ func (cm *jsonFileManager) getFileData(name string, tm int, updatesync, load boo
 			}
 
 			s = initialize(fpath, updatesync, items)
+			cm.m[name] = s
 
 			go watch(s, tm)
 		}

@@ -99,6 +99,8 @@ func (s *localStore) Collection(ctx context.Context, name string) (collection.Da
 		return nil, err
 	}
 
+	fmt.Println(&fdata)
+
 	return local.Collection(fdata), nil
 
 }
