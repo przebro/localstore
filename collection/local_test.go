@@ -2,6 +2,7 @@ package collection
 
 import (
 	"context"
+	"fmt"
 	"testing"
 
 	"github.com/przebro/databazaar/collection"
@@ -172,4 +173,18 @@ func TestAsQuerable(t *testing.T) {
 	if err == nil {
 		t.Error("unexpected result")
 	}
+}
+
+func TestAll(t *testing.T) {
+	crsr, err := col.All(context.Background())
+	if err != nil {
+		t.Error("unexpected result")
+	}
+	doc := &tst.TestDocument{}
+	for crsr.Next(context.Background()) {
+		crsr.Decode(&doc)
+		fmt.Println(doc)
+	}
+
+	crsr.Close()
 }

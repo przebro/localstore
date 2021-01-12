@@ -128,6 +128,11 @@ func (col *LocalCollection) CreateMany(ctx context.Context, docs []interface{}) 
 
 }
 
+func (col *LocalCollection) All(ctx context.Context) (collection.BazaarCursor, error) {
+	data := col.jsonData.All()
+	return NewCursor(data), nil
+}
+
 //AsQuerable - Normally this method should return QuerableCollection that allows querying the collection, but this is a simple key-value store
 func (col *LocalCollection) AsQuerable() (collection.QuerableCollection, error) {
 	return nil, errors.New("collection doesn't support query")
