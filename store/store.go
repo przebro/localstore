@@ -77,6 +77,7 @@ func initLocalstore(opt o.ConnectionOptions) (store.DataStore, error) {
 	return &localStore{manager: m, updsync: updsync, synctime: synctime}, nil
 }
 
+//CreateCollection - Creates a new collection
 func (s *localStore) CreateCollection(ctx context.Context, name string) (collection.DataCollection, error) {
 
 	if ok, _ := regexp.Match(`^[A-Za-z][\d\w]{0,31}$`, []byte(name)); !ok {
@@ -91,6 +92,8 @@ func (s *localStore) CreateCollection(ctx context.Context, name string) (collect
 	return local.Collection(fdata), nil
 
 }
+
+//Collection - gets a collection with a given name or returns an error if collection not found
 func (s *localStore) Collection(ctx context.Context, name string) (collection.DataCollection, error) {
 
 	fdata, err := s.manager.GetData(name, s.synctime, s.updsync)
@@ -102,6 +105,8 @@ func (s *localStore) Collection(ctx context.Context, name string) (collection.Da
 	return local.Collection(fdata), nil
 
 }
+
+//Status - returns status of store
 func (s *localStore) Status(context.Context) (string, error) {
 
 	st, err := os.Stat(s.manager.Path())
@@ -114,7 +119,8 @@ func (s *localStore) Status(context.Context) (string, error) {
 	return data, nil
 
 }
-func (s *localStore) Close(ctx context.Context) {
 
+//Close - closes the store
+func (s *localStore) Close(ctx context.Context) {
 	s.manager.Close()
 }

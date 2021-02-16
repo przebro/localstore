@@ -31,7 +31,7 @@ func Collection(d *local.JsonFileData) collection.DataCollection {
 	return &LocalCollection{jsonData: d}
 }
 
-//Create - creates a new record in a collection
+//Create - creates a new record in the collection
 func (col *LocalCollection) Create(ctx context.Context, document interface{}) (*result.BazaarResult, error) {
 
 	id, _, err := collection.RequiredFields(document)
@@ -55,19 +55,19 @@ func (col *LocalCollection) Create(ctx context.Context, document interface{}) (*
 	return &result.BazaarResult{ID: id}, nil
 }
 
-//Get - returns a single record with given id from the collection,if the key not exists returns error
+//Get - returns a single record with given id from the collection, if the key not exists returns an error
 func (col *LocalCollection) Get(ctx context.Context, id string, result interface{}) error {
 
 	data, exists := col.jsonData.Get(id)
 
 	if !exists {
-		return errors.New("keys does not exists")
+		return errors.New("key not exists")
 	}
 
 	return json.Unmarshal(data, result)
 }
 
-//Update - updates a single record in a collection
+//Update - updates a single record in the collection
 func (col *LocalCollection) Update(ctx context.Context, doc interface{}) error {
 
 	id, _, err := collection.RequiredFields(doc)
@@ -87,7 +87,7 @@ func (col *LocalCollection) Update(ctx context.Context, doc interface{}) error {
 
 }
 
-//Delete - deletes a record from a collection
+//Delete - deletes a record from the collection
 func (col *LocalCollection) Delete(ctx context.Context, id string) error {
 
 	if id == "" {
@@ -99,7 +99,7 @@ func (col *LocalCollection) Delete(ctx context.Context, id string) error {
 
 }
 
-//CreateMany - Bulk insert records into the collection
+//CreateMany - bulk insert records into the collection
 func (col *LocalCollection) CreateMany(ctx context.Context, docs []interface{}) ([]result.BazaarResult, error) {
 
 	fn := func(doc interface{}) (key string, value []byte, err error) {
@@ -128,6 +128,7 @@ func (col *LocalCollection) CreateMany(ctx context.Context, docs []interface{}) 
 
 }
 
+//All - returns all available documents from the collection
 func (col *LocalCollection) All(ctx context.Context) (collection.BazaarCursor, error) {
 	data := col.jsonData.All()
 	return NewCursor(data), nil
