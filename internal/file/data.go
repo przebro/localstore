@@ -212,6 +212,15 @@ func (s *JsonFileData) Get(key string) (json.RawMessage, bool) {
 	return item, ok
 }
 
+//Count - returns a total number of elements in a collection
+func (s *JsonFileData) Count() int64 {
+
+	defer s.lock.RUnlock()
+	s.lock.RLock()
+
+	return int64(len(s.items))
+}
+
 //Update - updates an item
 func (s *JsonFileData) Update(key string, item json.RawMessage) error {
 

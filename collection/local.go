@@ -61,7 +61,7 @@ func (col *LocalCollection) Get(ctx context.Context, id string, result interface
 	data, exists := col.jsonData.Get(id)
 
 	if !exists {
-		return errors.New("key not exists")
+		return collection.ErrNoDocuments
 	}
 
 	return json.Unmarshal(data, result)
@@ -96,7 +96,12 @@ func (col *LocalCollection) Delete(ctx context.Context, id string) error {
 	col.jsonData.Delete(id)
 
 	return nil
+}
 
+//Count - returns a total number of elements in a collection
+func (col *LocalCollection) Count(ctx context.Context) (int64, error) {
+
+	return col.jsonData.Count(), nil
 }
 
 //CreateMany - bulk insert records into the collection
