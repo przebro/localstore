@@ -279,7 +279,6 @@ func (s *JsonFileData) Sync() {
 	result, _ := json.Marshal(tmp)
 
 	ioutil.WriteFile(s.path, result, 0644)
-
 }
 
 func initialize(path string, updatesync bool, items map[string]json.RawMessage) *JsonFileData {

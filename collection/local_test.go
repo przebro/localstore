@@ -2,7 +2,6 @@ package collection
 
 import (
 	"context"
-	"fmt"
 	"testing"
 
 	"github.com/przebro/databazaar/collection"
@@ -153,6 +152,37 @@ func TestUpdate(t *testing.T) {
 
 }
 
+func TestAsQuerable(t *testing.T) {
+
+	_, err := col.AsQuerable()
+	if err == nil {
+		t.Error("unexpected result")
+	}
+}
+func TestCount(t *testing.T) {
+	s, _ := col.Count(context.Background())
+	if s == 0 {
+		t.Error("unexpected result:", s)
+	}
+}
+func TestAll(t *testing.T) {
+	crsr, err := col.All(context.Background())
+	if err != nil {
+		t.Error("unexpected result")
+	}
+	doc := &tst.TestDocument{}
+	num := 0
+	for crsr.Next(context.Background()) {
+		crsr.Decode(&doc)
+		num++
+	}
+	if num == 0 {
+		t.Error("unexpected result:", num)
+	}
+
+	crsr.Close()
+}
+
 func TestDelete(t *testing.T) {
 
 	err := col.Delete(context.Background(), singleRecordWithID.ID)
@@ -166,25 +196,4 @@ func TestDelete(t *testing.T) {
 	if err == nil {
 		t.Error("unexpected result:", err)
 	}
-}
-func TestAsQuerable(t *testing.T) {
-
-	_, err := col.AsQuerable()
-	if err == nil {
-		t.Error("unexpected result")
-	}
-}
-
-func TestAll(t *testing.T) {
-	crsr, err := col.All(context.Background())
-	if err != nil {
-		t.Error("unexpected result")
-	}
-	doc := &tst.TestDocument{}
-	for crsr.Next(context.Background()) {
-		crsr.Decode(&doc)
-		fmt.Println(doc)
-	}
-
-	crsr.Close()
 }

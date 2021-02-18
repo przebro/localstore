@@ -90,7 +90,6 @@ func (s *localStore) CreateCollection(ctx context.Context, name string) (collect
 	}
 
 	return local.Collection(fdata), nil
-
 }
 
 //Collection - gets a collection with a given name or returns an error if collection not found
@@ -103,7 +102,6 @@ func (s *localStore) Collection(ctx context.Context, name string) (collection.Da
 	}
 
 	return local.Collection(fdata), nil
-
 }
 
 //Status - returns status of store
