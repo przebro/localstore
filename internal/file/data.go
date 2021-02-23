@@ -193,7 +193,6 @@ func (s *JsonFileData) ForEach(items []interface{}, kc KeyCollector, fn func(ite
 		k, v, e := fn(items[n])
 		if _, exists := s.items[k]; exists || e != nil {
 			return e
-
 		}
 		s.items[k] = v
 		kc.Collect(k)
@@ -238,6 +237,19 @@ func (s *JsonFileData) Update(key string, item json.RawMessage) error {
 	return errKeyNotFound
 }
 
+//Bulk - performs bulk upsert
+func (s *JsonFileData) Bulk(keys []string, items []json.RawMessage) {
+
+	if s.updatesync {
+		defer s.Sync()
+	}
+	defer s.lock.Unlock()
+	s.lock.Lock()
+	for i, k := range keys {
+		s.items[k] = items[i]
+	}
+}
+
 //Delete - removes an item from a store
 func (s *JsonFileData) Delete(key string) {
 
@@ -277,7 +289,6 @@ func (s *JsonFileData) Sync() {
 	s.lock.Unlock()
 
 	result, _ := json.Marshal(tmp)
-
 	ioutil.WriteFile(s.path, result, 0644)
 }
 

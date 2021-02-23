@@ -133,6 +133,39 @@ func (col *LocalCollection) CreateMany(ctx context.Context, docs []interface{}) 
 
 }
 
+//BulkUpdate - bulk update/inserts records into the collection
+func (col *LocalCollection) BulkUpdate(ctx context.Context, docs []interface{}) error {
+
+	var key string
+	var err error
+	var val []byte
+
+	keys := []string{}
+	items := []json.RawMessage{}
+
+	for _, doc := range docs {
+		if key, _, err = collection.RequiredFields(doc); err != nil {
+			return err
+		}
+
+		if key == "" {
+			return collection.ErrEmptyOrInvalidID
+		}
+
+		if val, err = json.Marshal(doc); err != nil {
+			return err
+		}
+
+		keys = append(keys, key)
+		items = append(items, val)
+	}
+
+	col.jsonData.Bulk(keys, items)
+
+	return nil
+
+}
+
 //All - returns all available documents from the collection
 func (col *LocalCollection) All(ctx context.Context) (collection.BazaarCursor, error) {
 	data := col.jsonData.All()

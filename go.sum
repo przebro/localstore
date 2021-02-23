@@ -8,3 +8,5 @@ github.com/przebro/databazaar v0.0.0-20210112011856-4648c2d52594 h1:7+CCS2Izt48c
 github.com/przebro/databazaar v0.0.0-20210112011856-4648c2d52594/go.mod h1:Q7IUKG8A9EavUvNGyXiWAFC6BECCiuc8A2+qd0KFfP4=
 github.com/przebro/databazaar v0.0.0-20210217230212-db441ae2ba90 h1:b+yKwMMURoF+xDv5T/VoZUjySsmQdxWTI4YjLJefKPs=
 github.com/przebro/databazaar v0.0.0-20210217230212-db441ae2ba90/go.mod h1:Q7IUKG8A9EavUvNGyXiWAFC6BECCiuc8A2+qd0KFfP4=
+github.com/przebro/databazaar v0.0.0-20210222233636-a6956fda6d41 h1:00WU83OgsppefT3Iojf7xpr/qPJjaG2lyrM39yEkm6I=
+github.com/przebro/databazaar v0.0.0-20210222233636-a6956fda6d41/go.mod h1:Q7IUKG8A9EavUvNGyXiWAFC6BECCiuc8A2+qd0KFfP4=
