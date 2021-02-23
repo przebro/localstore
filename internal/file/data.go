@@ -229,12 +229,10 @@ func (s *JsonFileData) Update(key string, item json.RawMessage) error {
 
 	defer s.lock.Unlock()
 	s.lock.Lock()
-	if _, ok := s.items[key]; ok {
-		s.items[key] = item
-		return nil
-	}
 
-	return errKeyNotFound
+	s.items[key] = item
+
+	return nil
 }
 
 //Bulk - performs bulk upsert
