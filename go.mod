@@ -1,5 +1,5 @@
 module github.com/przebro/localstore
 
-go 1.14
+go 1.19
 
-require github.com/przebro/databazaar v0.0.0-20210222233636-a6956fda6d41
+require github.com/przebro/databazaar v0.0.0-20221211231135-6a56dfba4332

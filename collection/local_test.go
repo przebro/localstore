@@ -2,9 +2,12 @@ package collection
 
 import (
 	"context"
+	"encoding/json"
+	"os"
 	"testing"
 
 	"github.com/przebro/databazaar/collection"
+	"github.com/przebro/databazaar/selector"
 	local "github.com/przebro/localstore/internal/file"
 
 	tst "github.com/przebro/databazaar/collection/testing"
@@ -23,7 +26,7 @@ func init() {
 	singleRecordWithID, testCollection = tst.GetSingleRecord("../data/testdata.json")
 	manager := local.GetFileManager("../")
 
-	data, err := manager.NewData("testcollection", 1, false)
+	data, err := manager.NewData("testcollection", 0, false)
 	if err != nil {
 		panic("")
 	}
@@ -152,13 +155,6 @@ func TestUpdate(t *testing.T) {
 
 }
 
-func TestAsQuerable(t *testing.T) {
-
-	_, err := col.AsQuerable()
-	if err == nil {
-		t.Error("unexpected result")
-	}
-}
 func TestCount(t *testing.T) {
 	s, _ := col.Count(context.Background())
 	if s == 0 {
@@ -196,4 +192,80 @@ func TestDelete(t *testing.T) {
 	if err == nil {
 		t.Error("unexpected result:", err)
 	}
+}
+
+func TestSelect(t *testing.T) {
+
+	type testTable struct {
+		ex       selector.Expr
+		expected int
+	}
+
+	table := []testTable{
+		{selector.Eq("oscars", selector.Bool(true)), 4},
+		{selector.Eq("oscars", selector.Bool(false)), 5},
+		{selector.Ne("oscars", selector.Bool(false)), 4},
+		{selector.Eq("year", selector.Int(1986)), 2},
+		{selector.Ne("year", selector.Int(1980)), 7},
+		{selector.Gt("year", selector.Int(1980)), 6},
+		{selector.Gte("year", selector.Int(1980)), 8},
+		{selector.Lt("year", selector.Int(1980)), 1},
+		{selector.Lte("year", selector.Int(1980)), 3},
+	}
+
+	prepareCollection()
+
+	querable, _ := col.AsQuerable()
+
+	for _, n := range table {
+		crsr, _ := querable.Select(context.Background(), n.ex, selector.Fields{})
+		c := crsr.(*cursor)
+		if len(c.data) != n.expected {
+			t.Error("unexpected result:", len(c.data))
+		}
+	}
+
+	// //querable.Select(context.Background(), selector.Eq("oscars", selector.Bool(false)), selector.Fields{})
+	// crsr, _ := querable.Select(context.Background(), selector.Gt("year", selector.Int(1985)), selector.Fields{})
+	// c := crsr.(*cursor)
+	// fmt.Println(len(c.data))
+
+	// querable.Select(context.Background(), selector.Or(
+	// 	selector.Eq("year", selector.Int(1982)),
+	// 	selector.Eq("year", selector.Int(1998)),
+	// ), []string{})
+	// //year = 1984
+	// // { $or :
+}
+
+func prepareCollection() {
+	data, err := os.ReadFile("../data/testdata.json")
+	if err != nil {
+		panic("panic")
+	}
+
+	out := map[string]interface{}{}
+	json.Unmarshal(data, &out)
+
+	cc := out["collection"].([]interface{})
+	for _, x := range cc {
+
+		nn := x.(map[string]interface{})
+
+		flt := nn["score"].(float64)
+		yr := nn["year"].(float64)
+		osc := nn["oscars"].(bool)
+
+		doc := tst.TestDocument{
+			ID:     nn["_id"].(string),
+			Title:  nn["title"].(string),
+			Score:  float32(flt),
+			Year:   int(yr),
+			Genre:  nn["genre"].(string),
+			Oscars: osc,
+		}
+
+		col.Create(context.TODO(), doc)
+	}
+
 }

@@ -89,7 +89,15 @@ func TestOptions(t *testing.T) {
 		t.Error("unexpected result")
 	}
 }
+func TestAbsPath(t *testing.T) {
 
+	_, err := store.NewStore("local;//Users/casual/overseer/data/journal?updatesync=true")
+
+	if err == nil {
+		t.Error("unexpected result")
+	}
+
+}
 func TestStatus(t *testing.T) {
 
 	ds, _ := store.NewStore("local;/../data")

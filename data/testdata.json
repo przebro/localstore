@@ -1,13 +1,13 @@
 {
     "single" : {"_id": "single_record", "title": "The Matrix", "score": 8.1, "year": 1982, "oscars": false},
     "collection":[
-    {"_id": "document_01", "title": "The Godfather", "score": 9.2, "year": 1972, "oscars": true},
-	{"_id": "document_02", "title": "The Big Lebowski", "score": 8.1, "year": 1998, "oscars": false},
-	{"_id": "document_03", "title": "Terminator 2:Judgment Day", "score": 8.5, "year": 1991, "oscars": true},
-	{"_id": "document_04", "title": "The Shining", "score": 8.4, "year": 1980, "oscars": false},
-	{"_id": "document_05", "title": "Star Wars: Episode V - The Empire Strikes Back", "score": 8.7, "year": 1980, "oscars": true},
-	{"_id": "document_06", "title": "The Thing", "score": 8.1, "year": 1982, "oscars": false},
-	{"_id": "document_07", "title": "Platoon", "score": 8.1, "year": 1986, "oscars": true},
-	{"_id": "document_08", "title": "Der Name der Rose", "score": 7.7, "year": 1986, "oscars": false},
-	{"_id": "document_09", "title": "Predator", "score": 7.8, "year": 1987, "oscars": false}
+    {"_id": "document_01", "title": "The Godfather","genre" : "drama", "score": 9.2, "year": 1972, "oscars": true},
+	{"_id": "document_02", "title": "The Big Lebowski","genre" : "comedy", "score": 8.1, "year": 1998, "oscars": false},
+	{"_id": "document_03", "title": "Terminator 2:Judgment Day","genre" : "drama", "score": 8.5, "year": 1991, "oscars": true},
+	{"_id": "document_04", "title": "The Shining", "score": 8.4,"genre" : "thriller", "year": 1980, "oscars": false},
+	{"_id": "document_05", "title": "Star Wars: Episode V - The Empire Strikes Back","genre" : "scifi", "score": 8.7, "year": 1980, "oscars": true},
+	{"_id": "document_06", "title": "The Thing","genre" : "thriller", "score": 8.1, "year": 1982, "oscars": false},
+	{"_id": "document_07", "title": "Platoon","genre" : "drama", "score": 8.1, "year": 1986, "oscars": true},
+	{"_id": "document_08", "title": "Der Name der Rose","genre" : "drama", "score": 7.7, "year": 1986, "oscars": false},
+	{"_id": "document_09", "title": "Predator","genre" : "scifi", "score": 7.8, "year": 1987, "oscars": false}
 ]}

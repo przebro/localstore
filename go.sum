@@ -1,12 +1,2 @@
-github.com/przebro/databazaar v0.0.0-20210102000057-d1449e7d6cc5 h1:32OJ+++O0DFDkxO0PxXiI6KoDxMmUdpgrkqQvl1X+N4=
-github.com/przebro/databazaar v0.0.0-20210102000057-d1449e7d6cc5/go.mod h1:Q7IUKG8A9EavUvNGyXiWAFC6BECCiuc8A2+qd0KFfP4=
-github.com/przebro/databazaar v0.0.0-20210102223320-d19a128df9e2 h1:sNqJttNRHyAc3Wjyvz4cSOtPntXsWVoyn8PsClhZlc4=
-github.com/przebro/databazaar v0.0.0-20210102223320-d19a128df9e2/go.mod h1:Q7IUKG8A9EavUvNGyXiWAFC6BECCiuc8A2+qd0KFfP4=
-github.com/przebro/databazaar v0.0.0-20210107000945-c2812a415bed h1:MARYROCH9exFWYMRC4MeqHRxn+gK0W7AbTsb7xEZuaU=
-github.com/przebro/databazaar v0.0.0-20210107000945-c2812a415bed/go.mod h1:Q7IUKG8A9EavUvNGyXiWAFC6BECCiuc8A2+qd0KFfP4=
-github.com/przebro/databazaar v0.0.0-20210112011856-4648c2d52594 h1:7+CCS2Izt48cCstFzPTnC8Sj5mEjBUmE/EzVdZQLbQk=
-github.com/przebro/databazaar v0.0.0-20210112011856-4648c2d52594/go.mod h1:Q7IUKG8A9EavUvNGyXiWAFC6BECCiuc8A2+qd0KFfP4=
-github.com/przebro/databazaar v0.0.0-20210217230212-db441ae2ba90 h1:b+yKwMMURoF+xDv5T/VoZUjySsmQdxWTI4YjLJefKPs=
-github.com/przebro/databazaar v0.0.0-20210217230212-db441ae2ba90/go.mod h1:Q7IUKG8A9EavUvNGyXiWAFC6BECCiuc8A2+qd0KFfP4=
-github.com/przebro/databazaar v0.0.0-20210222233636-a6956fda6d41 h1:00WU83OgsppefT3Iojf7xpr/qPJjaG2lyrM39yEkm6I=
-github.com/przebro/databazaar v0.0.0-20210222233636-a6956fda6d41/go.mod h1:Q7IUKG8A9EavUvNGyXiWAFC6BECCiuc8A2+qd0KFfP4=
+github.com/przebro/databazaar v0.0.0-20221211231135-6a56dfba4332 h1:QvF7qgyuo75HGS7eFhY4+i/AfXSzB7TVG54+kYMsdLw=
+github.com/przebro/databazaar v0.0.0-20221211231135-6a56dfba4332/go.mod h1:UBf/S0wIV2HztIR5cyU6c2GIW/6NKm+vYorlFC5wHp0=

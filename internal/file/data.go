@@ -201,6 +201,20 @@ func (s *JsonFileData) ForEach(items []interface{}, kc KeyCollector, fn func(ite
 	return nil
 }
 
+func (s *JsonFileData) Over(fn func(item json.RawMessage) bool) ([]json.RawMessage, error) {
+	defer s.lock.Unlock()
+	s.lock.Lock()
+
+	result := []json.RawMessage{}
+	for _, n := range s.items {
+		if fn(n) {
+			result = append(result, n)
+		}
+	}
+
+	return result, nil
+}
+
 //Get - gets an item from a store
 func (s *JsonFileData) Get(key string) (json.RawMessage, bool) {
 
