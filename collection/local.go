@@ -197,6 +197,10 @@ func (col *LocalCollection) AsQuerable() (collection.QuerableCollection, error) 
 	return col, nil
 }
 
+func (col *LocalCollection) Type() string {
+	return "local"
+}
+
 func apply(item map[string]interface{}, s selector.Expr) bool {
 
 	if sel, ok := s.(*selector.CmpExpr); ok {
